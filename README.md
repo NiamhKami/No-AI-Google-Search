@@ -2,6 +2,14 @@
 
 No AI Google Search is a Chrome extension designed to enhance your Google search experience by disabling AI-generated previews. This extension automatically removes AI Previews Google searches to ensure you get the classic search results without AI Previews.
 
+## Fork Notes
+
+Google at some point stopped the method of appending -ai at the end of the search from working reliably. However, adding &udm=14 tag tell the search engine you only want web results. I have updated in this fork to instead check for and append &udm=14 to the URL rather than checking and appending -ai on the query.
+
+It ensures to not interfere with other udm=## modes of Google and the default dpr=1 mode
+
+Additionally since people may sometimes want to do an AI search, to avoid the need to go in and disable the plugin every time you would want to do that, simply add the keyword "giveai" at the end of your search string and it will then strip that out and call the dpr=1 mode instead of the udm=14 mode. (Note: if you've already searched and it appended udm=14 you will need to click the "All" on the webpage as it won't strip back out the udm=14 until you've done that, but if you search from Chrome or Opera search bar with giveai in the query it'll strip that and put you in default mode)
+
 ## Features
 
 - **Disable AI Previews:** Automatically reviews Google's new AI-generated previews.
@@ -12,10 +20,7 @@ No AI Google Search is a Chrome extension designed to enhance your Google search
 
 ### Chrome Web Store
 
-You can install the extension directly from the Chrome Web Store:
-
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/kkkmdpaccgdbipbgemkpfidkckdfekhl)](https://chrome.google.com/webstore/detail/no-ai-google-search/kkkmdpaccgdbipbgemkpfidkckdfekhl/)
-
+I haven't put it up on the Chrome Web Store at this time, I'm not normally a developer so I don't have a Chrome developer account. Use manual installation method to install this.
 
 ### Manual Installation
 
@@ -27,4 +32,3 @@ You can install the extension directly from the Chrome Web Store:
 ## Usage
 
 Once installed, the extension will remove nodes that belong to Google's AI previews. 
-

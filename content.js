@@ -8,19 +8,31 @@ function addAiParameter() {
         const searchParams = url.searchParams;
         const query = searchParams.get('q');
 
-        // Only modify if there's a search query and it doesn't already contain -ai
-        if (query && !query.toLowerCase().includes('-ai')) {
-            // Add -ai to the search query
-            const newQuery = query + ' -ai';
-            searchParams.set('q', newQuery);
+		if (query && !query.toLowerCase().includes('giveai')) {
+        // Only modify if there's a search query and it doesn't already contain udm=14
+			if (currentUrl && !currentUrl.includes('udm=') && !currentUrl.includes('dpr=')) {
+				// Add -ai to the search query
+				// const newQuery = query;
+				// searchParams.set('q', newQuery);
 
-            // Update the URL without reloading the page
-            const newUrl = url.toString();
-            window.history.replaceState({}, '', newUrl);
+				// Update the URL without reloading the page
+				const newUrl = url.toString() + '&udm=14';
+				window.history.replaceState({}, '', newUrl);
 
-            // Reload the page to get results without AI overviews
-            window.location.reload();
-        }
+				// Reload the page to get results without AI overviews
+				window.location.reload();
+			}
+		} else {
+			const newQuery = query.replace("giveai", "").replaceAll("\\s+", " ").trim();
+			searchParams.set('q', newQuery);
+
+			// Update the URL without reloading the page
+			const newUrl = url.toString() + '&dpr=1';
+			window.history.replaceState({}, '', newUrl);
+
+			// Reload the page to get results without AI overviews
+			window.location.reload();
+		}
     }
 }
 
