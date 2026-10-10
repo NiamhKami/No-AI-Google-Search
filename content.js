@@ -9,11 +9,8 @@ function addAiParameter() {
         const query = searchParams.get('q');
 
 		if (query && !query.toLowerCase().includes('giveai')) {
-        // Only modify if there's a search query and it doesn't already contain udm=14
+        // Only modify if there's a search query and it doesn't already contain a udm= or dpr= mode
 			if (currentUrl && !currentUrl.includes('udm=') && !currentUrl.includes('dpr=')) {
-				// Add -ai to the search query
-				// const newQuery = query;
-				// searchParams.set('q', newQuery);
 
 				// Update the URL without reloading the page
 				const newUrl = url.toString() + '&udm=14';
@@ -23,14 +20,15 @@ function addAiParameter() {
 				window.location.reload();
 			}
 		} else {
+			// Strip the giveai keyword out of the actual query, since it's not actually part of the search, just a trigger
 			const newQuery = query.replace("giveai", "").replaceAll("\\s+", " ").trim();
 			searchParams.set('q', newQuery);
 
-			// Update the URL without reloading the page
+			// Update the URL without reloading the page (dpr=1 is default mode)
 			const newUrl = url.toString() + '&dpr=1';
 			window.history.replaceState({}, '', newUrl);
 
-			// Reload the page to get results without AI overviews
+			// Reload the page for dpr=1 mode
 			window.location.reload();
 		}
     }
